@@ -30,16 +30,13 @@
                                 <div v-if="card.colors">
                                     <h5><b>The card colors:</b></h5>
                                     <!-- eslint-disable-next-line vue/require-v-for-key -->
-                                    <p v-for="color in card.colors" :key="color.key">
-                                        {{ color }}
-                                    </p>
+                                    <img style="width:30px" v-for="color in card.colors" :key="color.key"
+                                        :src="manaColor(color)">
                                 </div>
                                 <div v-if="card.colorIdentity">
                                     <h5>The card’s color identity: </h5>
-                                    <p v-for="identity in card.colorIdentity" :key="identity.key">
-                                        {{ identity }}
-                                    </p>
-
+                                    <img style="width:30px" v-for="identity in card.colorIdentity" :key="identity.key"
+                                        :src="manaColor(identity)">
                                 </div>
                                 <p>The card type: {{ card.type }}</p>
                                 <div v-if="card.supertypes">
@@ -94,6 +91,27 @@
                                     </p>
 
                                 </div>
+                                <div v-if="card.foreignNames">
+                                    <h5>The foreign names of the card:</h5>
+                                    <p v-for="foreignName in card.foreignNames" :key="foreignName.id">
+                                        {{ foreignName.name }} <br>
+                                        language: {{ foreignName.language }} <br> Multiverseid:
+                                        {{ foreignName.multiverseid }}
+                                    </p>
+                                </div>
+                                <div v-if="card.originalText">
+                                    <h5>The card’s original text:</h5>
+                                    <p>
+                                        {{ card.originalText }}
+                                    </p>
+                                </div>
+                                <div v-if="card.originalType">
+                                    <h5>The card’s original type:</h5>
+                                    <p>
+                                        {{ card.originalType }}
+                                    </p>
+
+                                </div>
 
                             </div>
                         </div>
@@ -112,6 +130,23 @@ export default {
         cards: {
             type: Object,
             required: true
+        }
+    },
+    methods: {
+        manaColor(color) {
+            console.log(color)
+            if (color === 'W')
+                return 'mana-icons/white.png'
+            if (color === 'U')
+                return 'mana-icons/blue.png'
+            if (color === 'B')
+                return 'mana-icons/black.png'
+            if (color === 'R')
+                return 'mana-icons/red.png'
+            if (color === 'G')
+                return 'mana-icons/green.png'
+
+            return 'mana-icons/no-color.png'
         }
     }
 }
