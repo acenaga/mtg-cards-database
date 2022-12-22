@@ -9,25 +9,26 @@
                                 :data-bs-target="'#collapseOne' + card.id" aria-expanded="false"
                                 :aria-controls="'collapseOne' + card.id">
                                 {{ card.name }}
-                                <img class="w-50" :src="card.imageUrl" :alt="card.name">
+
+                                <img v-if="card.imageUrl" class="w-50" :src="card.imageUrl" :alt="card.name">
                             </button>
                         </h2>
                         <div :id="'collapseOne' + card.id" class="accordion-collapse collapse"
                             :aria-labelledby="'headingOne' + card.id" :data-bs-parent="'#accordionExample' + card.id">
                             <div class="accordion-body">
-                                <img :src="card.imageUrl" :alt="card.name">
-                                <p>Name: {{ card.name }}</p>
+                                <img v-if="card.imageUrl" :src="card.imageUrl" :alt="card.name">
+                                <p><b>Name:</b> {{ card.name }}</p>
                                 <div v-if="card.names">
                                     <p v-for="name in card.names" :key="name.id">
                                         {{ name }}
                                     </p>
 
                                 </div>
-                                <p>Artist: {{ card.artist }}</p>
-                                <p>Layout: {{ card.layout }}</p>
-                                <p>Converted mana cost: {{ card.cmc }}</p>
+                                <p><b>Artist:</b> {{ card.artist }}</p>
+                                <p><b>Layout:</b> {{ card.layout }}</p>
+                                <p><b>Converted mana cost:</b> {{ card.cmc }}</p>
                                 <div v-if="card.colors">
-                                    <h5>The card colors:</h5>
+                                    <h5><b>The card colors:</b></h5>
                                     <!-- eslint-disable-next-line vue/require-v-for-key -->
                                     <p v-for="color in card.colors" :key="color.key">
                                         {{ color }}
@@ -61,17 +62,18 @@
                                         {{ subtype }}
                                     </p>
                                 </div>
-                                <p>The card rarity: {{ card.rarity }}</p>
-                                <p>The set the card belongs to (set code): {{ card.set }}</p>
-                                <p>The set the card belongs to: {{ card.setName }}</p>
-                                <p>The oracle text of the card: {{ card.text }}</p>
-                                <p v-if="card.flavor">The flavor text of the card: {{ card.flavor }}</p>
-                                <p>The card number: {{ card.number }}</p>
-                                <p>The card power: {{ card.power }}</p>
-                                <p>The card toughness: {{ card.toughness }}</p>
-                                <p>The card loyalty: {{ card.loyalty }}</p>
-                                <p v-if="card.language">The language the card is printed in: {{ card.language }}</p>
-                                <p>The card multiverse id: {{ card.multiverseid }}</p>
+                                <p><b>The card rarity:</b> {{ card.rarity }}</p>
+                                <p><b>The set the card belongs to (set code):</b> {{ card.set }}</p>
+                                <p><b>The set the card belongs to:</b> {{ card.setName }}</p>
+                                <p><b>The oracle text of the card:</b> {{ card.text }}</p>
+                                <p v-if="card.flavor"><b>The flavor text of the card:</b> {{ card.flavor }}</p>
+                                <p><b>The card number:</b> {{ card.number }}</p>
+                                <p><b>The card power:</b> {{ card.power }}</p>
+                                <p><b>The card toughness:</b> {{ card.toughness }}</p>
+                                <p><b>The card loyalty:</b> {{ card.loyalty }}</p>
+                                <p v-if="card.language"><b>The language the card is printed in:</b> {{ card.language }}
+                                </p>
+                                <p><b>The card multiverse id:</b> {{ card.multiverseid }}</p>
                                 <div v-if="card.printings">
                                     <h5>The sets the card is printed in:</h5>
                                     <p v-for="print in card.printings" :key="print.id">
@@ -82,6 +84,13 @@
                                     <h5>The rulings of the card:</h5>
                                     <p v-for="ruling in card.rulings" :key="ruling.id">
                                         {{ ruling.date }}: {{ ruling.text }}
+                                    </p>
+
+                                </div>
+                                <div v-if="card.legalities">
+                                    <h5>Which formats this card is legal, restricted or banned in</h5>
+                                    <p v-for="legality in card.legalities" :key="legality.id">
+                                        {{ legality.format }}: {{ legality.legality }}
                                     </p>
 
                                 </div>
