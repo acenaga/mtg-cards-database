@@ -134,7 +134,6 @@ export default {
     },
     methods: {
         manaColor(color) {
-            console.log(color)
             if (color === 'W')
                 return 'mana-icons/white.png'
             if (color === 'U')

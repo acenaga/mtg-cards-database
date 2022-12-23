@@ -30,14 +30,16 @@ export default {
     return {
       responseApi: {},
       responseCards: {},
+      responseHeader: {}
     }
   },
   methods: {
     showResponse(response) {
-      console.log('desde el hijo');
-      console.log(response.data)
-      console.log('desde el hijo');
+      console.log('para el header');
+      console.log(response.headers)
+      console.log('para las cards');
       console.log(response.data.cards);
+      this.responseHeader = response.headers;
       this.responseCards = response.data.cards;
     }
   }
