@@ -7,6 +7,11 @@
           <figcaption>Your database Search</figcaption>
         </figure>
       </div>
+      <div class="col-12">
+        <p v-if="responseHeader.count">
+          {{ responseHeader.count }} cards found
+        </p>
+      </div>
     </div>
     <SearchForm @search="showResponse" />
     <CardList :cards="responseCards" />
