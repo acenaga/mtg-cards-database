@@ -2,6 +2,17 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-12 col-lg-4 ">
+                <p>Choosed: {{ chooseApi }}</p>
+                <input class="form-check-input" type="radio" value="1" v-model="chooseApi" id="chooseApi1">
+                <label class="form-check-label" for="chooseApi1">
+                    Api Magic the Gathering
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" value="2" v-model="chooseApi" id="chooseApi2" checked>
+                <label class="form-check-label" for="chooseApi2">
+                    SCy fall
+                </label>
                 <form class="d-flex">
                     <input class="form-control me-2" v-model="cardSearch" type="search" placeholder="Search"
                         aria-label="Search">
@@ -20,7 +31,8 @@ export default {
     data() {
         return {
             cardSearch: '',
-            responseApi: {}
+            responseApi: {},
+            chooseApi: '2'
 
         }
     },
