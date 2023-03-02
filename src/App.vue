@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row justify-content-center">
       <div class="col-lg-4">
-        <figure class="d-flex flex-column justify-content-center">
+        <figure class="d-flex flex-column justify-content-center align-items-center">
           <img class="w-50" alt="Magic the gathering Logo" src="./assets/logo.png">
           <figcaption>Your database Search</figcaption>
         </figure>
@@ -17,8 +17,6 @@
     <CardList :cards="responseCards" />
 
   </div>
-
-
 </template>
 
 <script>

@@ -16,7 +16,7 @@
                         <div :id="'collapseOne' + card.id" class="accordion-collapse collapse"
                             :aria-labelledby="'headingOne' + card.id" :data-bs-parent="'#accordionExample' + card.id">
                             <div class="accordion-body">
-                                <img v-if="card.imageUrl" :src="card.imageUrl" :alt="card.name">
+                                <img class="w-100" v-if="card.imageUrl" :src="card.imageUrl" :alt="card.name">
                                 <p><b>Name:</b> {{ card.name }}</p>
                                 <div v-if="card.names">
                                     <p v-for="name in card.names" :key="name.id">
@@ -120,7 +120,6 @@
             </div>
         </div>
     </div>
-
 </template>
 
 <script>
