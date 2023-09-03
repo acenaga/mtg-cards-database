@@ -6,7 +6,7 @@
                 <div class="form-check">
                     <input class="form-check-input" type="radio" value="1" v-model="chooseApi" id="chooseApi1" checked>
                     <label class="form-check-label" for="chooseApi1">
-                        Api Magic the Gathering
+                        Magic The gathering IO
                     </label>
                 </div>
                 <div class="form-check">
@@ -53,16 +53,27 @@ export default {
             cardSearch: '',
             responseApi: {},
             chooseApi: 1,
-            chooseType: 'cards'
+            chooseType: 'cards',
+            cardName: '',
+            legality: '',
+            price: '',
+            image: '',
+            imageFlip: '',
+            ruling: '',
+            type: '',
+            subType: '',
+            rarity: '',
+            set: '',
+            setName: '',
 
         }
     },
     methods: {
         searchingCard() {
 
-            console.log(this.chooseApi);
+            // console.log(this.chooseApi);
             if (this.chooseApi == 1) {
-                this.searchCard();
+                this.searchCardMagigIo();
             } else if (this.chooseApi == 2) {
                 this.searchCardScryfall();
             } else if (this.chooseApi == 3) {
@@ -70,7 +81,7 @@ export default {
             }
 
         },
-        async searchCard() {
+        async searchCardMagigIo() {
             const options = {
                 method: "GET",
                 url: "https://api.magicthegathering.io/v1/" + this.chooseType,
@@ -82,28 +93,33 @@ export default {
                 },
             };
             const response = await axios(options);
-            this.responseApi = response;
-            this.$emit('search', this.responseApi);
+
+            console.log(response.data);
+            this.responseApi = response.data.cards;
+            this.magicTheGatheringIo(this.responseApi);
+
         },
         async searchCardScryfall() {
+            // TODO read about scryfall api
             const options = {
                 method: "GET",
-                url: "https://api.scryfall.com",
+                url: "https://api.scryfall.com" + "/cards/named",
                 params: {
-                    name: this.cardSearch,
+                    fuzzy: this.cardSearch,
                 },
                 headers: {
                     "Content-Type": "application/json",
                 },
             };
             const response = await axios(options);
-            this.responseApi = response;
-            this.$emit('search', this.responseApi);
+            console.log(response);
+            // this.responseApi = response;
+            // this.$emit('search', this.responseApi);
         },
         async searchCardTgcPlayer() {
             const options = {
                 method: "GET",
-                url: "https://api.magicthegathering.io/v1/cards",
+                url: "https://api.magicthegathering.io/v1/" + this.chooseType,
                 params: {
                     name: this.cardSearch,
                 },
@@ -112,8 +128,49 @@ export default {
                 },
             };
             const response = await axios(options);
-            this.responseApi = response;
-            this.$emit('search', this.responseApi);
+            this.responseApi = response.data.cards;
+            console.log(this.responseApi);
+            // this.$emit('search', this.responseApi);
+        },
+
+        magicTheGatheringIo(response) {
+
+            response.forEach(element => {
+                this.cardName = element.name;
+                this.legality = element.legalities;
+                this.price = element.prices;
+                this.image = element.imageUrl;
+                this.imageFlip = element.imageFlipUrl;
+                this.ruling = element.rulings;
+                this.type = element.type;
+                this.subType = element.subType;
+                this.rarity = element.rarity;
+                this.set = element.set;
+                this.setName = element.setName;
+            });
+
+
+            this.$emit('search', response);
+        },
+
+        tgcPlayer(response) {
+            console.log(response);
+            // response.forEach(element => {
+            //     this.cardName = element.name;
+            //     this.legality = element.legalities;
+            //     this.price = element.prices;
+            //     this.image = element.imageUrl;
+            //     this.imageFlip = element.imageFlipUrl;
+            //     this.ruling = element.rulings;
+            //     this.type = element.type;
+            //     this.subType = element.subType;
+            //     this.rarity = element.rarity;
+            //     this.set = element.set;
+            //     this.setName = element.setName;
+            // });
+
+
+            //this.$emit('search', response);
         },
 
     }
