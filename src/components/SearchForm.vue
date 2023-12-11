@@ -112,7 +112,7 @@ export default {
                 },
             };
             const response = await axios(options);
-            console.log(response);
+            console.log(response.data);
             // this.responseApi = response;
             // this.$emit('search', this.responseApi);
         },
